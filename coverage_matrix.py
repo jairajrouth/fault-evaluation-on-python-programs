@@ -22,4 +22,4 @@ def read_lines():
 
 if __name__ == '__main__':
     read_lines()
-    # regex_example()
+
