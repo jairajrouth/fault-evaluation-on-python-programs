@@ -2,8 +2,8 @@ from git import Repo
 
 
 def clone_with_commit_id():
-    bug_info_file = open("1/bug.info", "r")
-    project_info_file = open("1/project.info", "r")
+    bug_info_file = open("6/bug.info", "r")
+    project_info_file = open("6/project.info", "r")
     split_lines = bug_info_file.read().split()
     buggy_commit_id = split_lines[1].split('"')
     buggy_commit_id = buggy_commit_id[1]
@@ -19,12 +19,12 @@ def clone_with_commit_id():
 
     """For Fetching buggy version of the project"""
     buggy_repo = Repo.clone_from(project_url,
-                                 "/home/jai/PycharmProjects/fault-evaluation-on-python-programs/buggy_version",
+                                 "C:/Users/jaira/PycharmProjects/fault-evaluation-on-python-programs/buggy_version",
                                  no_checkout=True)
     buggy_repo.git.checkout(buggy_commit_id)
     """For fetching the fixed version of the project"""
     fixed_repo = Repo.clone_from(project_url,
-                                 "/home/jai/PycharmProjects/fault-evaluation-on-python-programs/fixed_version",
+                                 "C:/Users/jaira/PycharmProjects/fault-evaluation-on-python-programs/fixed_version",
                                  no_checkout=True)
     fixed_repo.git.checkout(fixed_commit_id)
 
