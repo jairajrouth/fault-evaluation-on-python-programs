@@ -27,7 +27,7 @@ def generate_line_coverage():
         writer = pd.ExcelWriter(cov_file_path, engine='openpyxl', mode='a')
         writer.book = load_workbook(cov_file_path)
         writer.sheets = {ws.title: ws for ws in writer.book.worksheets}
-        statement_coverage_df.to_excel(writer, index=None, startcol=0, startrow=0)
+        statement_coverage_df.to_excel(writer, index=None, header=None, startcol=96)
         writer.save()
 
 
@@ -42,6 +42,6 @@ def get_tests_result():
 
 
 if __name__ == '__main__':
-    get_tests_result()
-    # generate_line_coverage()
+    # get_tests_result()
+    generate_line_coverage()
 
