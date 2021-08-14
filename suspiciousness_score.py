@@ -3,16 +3,19 @@ import math
 
 
 def calc_metrics_parameters():
-    coverage_df = pd.read_excel(r'C:\Users\jaira\PycharmProjects\fault-evaluation-on-python-programs'
-                                r'\buggy_coverage\statement_coverage_file.xlsx')
-    tests_result_df = pd.read_excel(r'C:\Users\jaira\PycharmProjects\fault-evaluation-on-python-programs'
-                                    r'\buggy_coverage\test_report_with_result_col.xlsx')
-    # Total statements is 3820
-    total_statements_indexes = len(coverage_df.index)
-    # Total test cases is 95
+    coverage_df = pd.read_excel(r'buggy_coverage/statement_coverage_file.xlsx')
+    tests_result_df = pd.read_excel(r'buggy_coverage/buggy_test_report_result_col.xlsx')
+    # Total statements is 4194
+    total_statements_indexes = len(coverage_df.index) - 4190
+    print("First Statement", coverage_df.index[0])
+    # Total test cases is 121
     total_test_cases = len(tests_result_df.columns)
+    print("First Test Case", tests_result_df.columns[2])
     # Parameters for metrics calculation
-    jaccard = op2 = ochiai = tarantula = 0
+    # jaccard = 0
+    # op2 = 0
+    # ochiai = 0
+    # tarantula = 0
     data = []
     data_col_name = ["Jaccard", "Op2", "Ochiai", "Tarantula"]
 
@@ -54,6 +57,7 @@ def calc_metrics_parameters():
     suspiciousness_df = pd.DataFrame(data, columns=data_col_name)
     suspiciousness_df = suspiciousness_df.fillna(0)
     print("dataframe", suspiciousness_df)
+    print("total statements, total test cases", total_statements_indexes, total_test_cases)
     suspiciousness_df.to_excel("buggy_coverage/suspiciousness_score.xlsx")
 
 
