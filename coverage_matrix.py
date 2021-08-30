@@ -42,8 +42,41 @@ def get_tests_result():
     test_results_df.to_excel("buggy_coverage/buggy_test_report_result_col.xlsx", startrow=0, startcol=0)
 
 
+def to_run_tests():
+    result_from_tests = pd.ExcelFile("fixed_test_reportm1.xlsx").parse("Sheet1")
+    tests_name = pd.DataFrame(result_from_tests, columns=['SUITE NAME', 'TEST NAME'])
+    number_of_tests = len(tests_name.index)
+    # print(">>>>>>>>>>>>>>", tests_name)
+    for num in range(number_of_tests):
+        print("<<<<<<<<<<<", tests_name.iloc[num])
+        if tests_name.iloc[num, 0] == "BlackTestCase":
+            cov = Coverage()
+            cov.start()
+            print("Running the Pytest...")
+            pytest.main(["-x", "tests/test_black.py::BlackTestCase::" + tests_name.iloc[num, 1]])
+            cov.stop()
+            cov.save()
+            cov.report()
+            print("Generating Coverage report...")
+            cov.html_report(directory='covhtml')
+            cov.erase()
+        else:
+            cov = Coverage()
+            cov.start()
+            print("Running the Pytest...")
+            pytest.main(["-x", "tests/test_black.py::BlackDTestCase::" + tests_name.iloc[num, 1]])
+            cov.stop()
+            cov.save()
+            cov.report()
+            print("Generating Coverage Report...")
+            cov.html_report(directory='covhtml')
+            cov.erase()
+
+            # # print("tests_name.iloc[52]", tests_name.iloc[52, 0])
+
 if __name__ == '__main__':
     # generate_line_coverage()
     get_tests_result()
+    to_run_tests()
 
 
