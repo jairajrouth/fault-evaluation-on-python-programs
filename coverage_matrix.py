@@ -74,6 +74,7 @@ def to_run_tests():
 
             # # print("tests_name.iloc[52]", tests_name.iloc[52, 0])
 
+
 if __name__ == '__main__':
     # generate_line_coverage()
     get_tests_result()
